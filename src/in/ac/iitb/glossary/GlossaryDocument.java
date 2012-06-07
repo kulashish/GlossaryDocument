@@ -3,6 +3,8 @@ package in.ac.iitb.glossary;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.fit.cssbox.css.CSSNorm;
 import org.fit.cssbox.css.DOMAnalyzer;
@@ -17,9 +19,25 @@ public class GlossaryDocument {
 	private static GlossaryDocument gDocument;
 	private Box rootBox;
 	private Box viewport;
+	private List<GlossaryBox> glossaryBoxes;
 
 	private GlossaryDocument() {
 
+	}
+
+	public List<GlossaryBox> getGlossaryBoxes() {
+		if (null == glossaryBoxes)
+			glossaryBoxes = new ArrayList<GlossaryBox>();
+		return glossaryBoxes;
+	}
+
+	public void setGlossaryBoxes(List<GlossaryBox> glossaryBoxes) {
+		this.glossaryBoxes = glossaryBoxes;
+	}
+
+	public void addGlossaryBox(Box root) {
+		GlossaryBox gBox = new GlossaryBox(root);
+		getGlossaryBoxes().add(gBox);
 	}
 
 	public Box getViewport() {

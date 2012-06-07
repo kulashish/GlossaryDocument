@@ -6,7 +6,7 @@ import in.ac.iitb.glossary.GlossaryDocument;
 
 import org.fit.cssbox.layout.Box;
 
-public class GlossaryBoxArea {
+public class GlossaryBoxArea extends VisualFeature {
 
 	public boolean condition(GlossaryBox gBox) {
 		GlossaryDocument gDocument = GlossaryDocument.getInstance();
