@@ -40,6 +40,8 @@ public class GlossaryBox {
 	}
 
 	public void groupSubboxes() {
+		if (!getGroupedSubBoxes().isEmpty())
+			return;
 		ElementBox elBox = (ElementBox) gBox;
 		for (Box subBox : elBox.getSubBoxList()) {
 			if (subBox.isVisible() && !subBox.canSplitInside())

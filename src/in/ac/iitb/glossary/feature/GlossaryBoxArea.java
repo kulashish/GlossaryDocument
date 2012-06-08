@@ -14,10 +14,10 @@ public class GlossaryBoxArea extends VisualFeature {
 		int rootArea = root.getContentHeight() * root.getContentWidth();
 		int boxArea = gBox.getHeight() * gBox.getWidth();
 		float areaRatio = boxArea / (rootArea * 1.0f);
-		System.out.println("Root: " + root);
-		System.out.println("Root Area: " + rootArea);
-		System.out.println("GBox Area: " + boxArea);
-		System.out.println("Area ratio: " + (boxArea / (rootArea * 1.0f)));
+//		System.out.println("Root: " + root);
+//		System.out.println("Root Area: " + rootArea);
+//		System.out.println("GBox Area: " + boxArea);
+//		System.out.println("Area ratio: " + (boxArea / (rootArea * 1.0f)));
 		return areaRatio > GlossaryConstants.GLOSSARY_AREARATIO_THRESHOLD;
 	}
 }

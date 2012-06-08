@@ -1,7 +1,10 @@
 package in.ac.iitb.glossary;
 
 import in.ac.iitb.glossary.feature.GlossaryBoxArea;
+import in.ac.iitb.glossary.feature.Pagination;
+import in.ac.iitb.glossary.feature.SameWidthSubboxes;
 import in.ac.iitb.glossary.feature.SameClassSubboxes;
+import in.ac.iitb.glossary.feature.SubboxAlignment;
 import in.ac.iitb.glossary.feature.VisualFeature;
 
 import org.fit.cssbox.layout.Box;
@@ -14,22 +17,48 @@ public class GlossaryClassifier {
 			System.err.println("Usage: GlossaryClassifier <url>");
 			System.exit(0);
 		}
+		GlossaryClassifier classifier = new GlossaryClassifier();
+		classifier.classify(args[0]);
+	}
 
+	public void classify(String strURL) {
 		try {
 			GlossaryDocument gDocument = GlossaryDocument
-					.createInstance(args[0]);
+					.createInstance(strURL);
 
 			// Number of Sub boxes condition
 			GlossaryClassifier classifier = new GlossaryClassifier();
 			classifier.subBoxes(gDocument.getViewport());
+			System.out.println("Subboxes count condition : "
+					+ (gDocument.getGlossaryBoxes().size() > 0));
 
 			// Sub boxes of same class condition
 			VisualFeature sameclassCondition = new SameClassSubboxes();
 			sameclassCondition.executeCondition();
+			System.out.println("Subboxes of same class condition : "
+					+ (gDocument.getGlossaryBoxes().size() > 0));
 
 			// Ratio of area of glossary box to viewport area
 			VisualFeature areaCondition = new GlossaryBoxArea();
 			areaCondition.executeCondition();
+			System.out.println("Glossary box to viewport area condition : "
+					+ (gDocument.getGlossaryBoxes().size() > 0));
+
+			// Same WIDTH subboxes
+			VisualFeature sameareaCondition = new SameWidthSubboxes();
+			sameareaCondition.executeCondition();
+			System.out.println("Subboxes of same area condition : "
+					+ (gDocument.getGlossaryBoxes().size() > 0));
+
+			// Aligned subboxes
+			VisualFeature subboxesAligned = new SubboxAlignment();
+			subboxesAligned.executeCondition();
+			System.out.println("Subboxes aligned condition : "
+					+ (gDocument.getGlossaryBoxes().size() > 0));
+
+			// Pagination
+			Pagination pagination = new Pagination();
+			System.out.println("Pagination : " + pagination.condition());
 
 			System.out.println("Number of potential glossary Boxes:"
 					+ gDocument.getGlossaryBoxes().size());
